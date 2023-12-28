@@ -27,7 +27,7 @@ class SeriesController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Series/Create');
     }
 
     /**
