@@ -17,7 +17,9 @@ class SeriesController extends Controller
             'The Walking Dead',
         ];
 
-        return $series;
+        return inertia('Series/Index', [
+            'series' => $series,
+        ]);
     }
 
     /**
