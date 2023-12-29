@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Serie;
 use Illuminate\Http\Request;
 
 class SeriesController extends Controller
@@ -11,11 +12,9 @@ class SeriesController extends Controller
      */
     public function index()
     {
-        $series = [
-            'Game of Thrones',
-            'Stranger Things',
-            'The Walking Dead',
-        ];
+        $series = Serie::query()
+            ->orderBy('title')
+            ->get();
 
         return inertia('Series/Index', [
             'series' => $series,
@@ -35,7 +34,11 @@ class SeriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $serie = Serie::create([
+            'title' => $request->title,
+        ]);
+
+        return redirect()->route('series.index');
     }
 
     /**
