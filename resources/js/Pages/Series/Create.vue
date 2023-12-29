@@ -1,18 +1,18 @@
 <template>
   <MainLayout title="Adicionar Série">
-    <Link :href="route('series.index')">
+    <ButtonLink :href="route('series.index')" >
       Voltar
-    </Link>
-    <form action="post">
-      <label for="name">
+    </ButtonLink>
+    <form action="post" class="mt-4">
+      <label for="name" class="block mb-2">
         Nome da Série:
       </label>
-      <input type="text" name="name" id="name" />
+      <input type="text" name="name" id="name" class="border border-gray-400 p-2 rounded w-full" />
     </form>
   </MainLayout>
 </template>
 
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue';
-import { Link } from '@inertiajs/vue3';
+import ButtonLink from '@/Components/ButtonLink.vue';
 </script>
