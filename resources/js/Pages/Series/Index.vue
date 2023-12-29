@@ -1,5 +1,8 @@
 <template>
   <MainLayout title="Series">
+    <SuccessMessage v-if="$page.props.flash.success">
+      {{ $page.props.flash.success }}
+    </SuccessMessage>
     <ButtonLink :href="route('series.create')" >
       Adicionar Série
     </ButtonLink>
@@ -20,6 +23,7 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue';
 import ButtonLink from '@/Components/ButtonLink.vue';
+import SuccessMessage from '@/Components/SuccessMessage.vue';
 
 import { useForm } from '@inertiajs/vue3';
 
@@ -31,6 +35,11 @@ const props = defineProps({
 });
 
 const form = useForm({
-  title: '',
+  delete: {
+    onSuccess: () => {
+      form.reset();
+      form.post(route('series.index'));
+    },
+  },
 });
 </script>

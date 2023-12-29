@@ -38,7 +38,7 @@ class SeriesController extends Controller
             'title' => $request->title,
         ]);
 
-        return redirect()->route('series.index');
+        return redirect()->route('series.index')->with('success', 'Série criada com sucesso!');
     }
 
     /**
@@ -73,6 +73,6 @@ class SeriesController extends Controller
         $serie = Serie::findOrFail($id);
         $serie->delete();
 
-        return redirect()->route('series.index');
+        return redirect()->route('series.index')->with('success', 'Série excluída com sucesso!');
     }
 }
