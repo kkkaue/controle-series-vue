@@ -54,7 +54,11 @@ class SeriesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $serie = Serie::findOrFail($id);
+
+        return inertia('Series/Edit', [
+            'serie' => $serie,
+        ]);
     }
 
     /**
@@ -62,7 +66,12 @@ class SeriesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $serie = Serie::findOrFail($id);
+        $serie->update([
+            'title' => $request->title,
+        ]);
+
+        return redirect()->route('series.index')->with('success', 'Série atualizada com sucesso!');
     }
 
     /**

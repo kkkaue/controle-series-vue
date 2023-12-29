@@ -10,11 +10,16 @@
       <li v-for="(serie, index) in series" :key="index" class="py-2 px-4 bg-white shadow mb-4 rounded flex justify-between items-center">
         {{ serie.title }}
 
-        <form @submit.prevent="form.delete(route('series.destroy', serie.id))" class="inline-block">
-          <button type="submit" class="bg-red-500 text-white rounded py-2 px-4 mt-4 hover:bg-red-600">
-            Excluir
-          </button>
-        </form>
+        <span class="flex gap-2">
+          <ButtonLink :href="route('series.edit', serie.id)">
+            Editar
+          </ButtonLink>
+          <form @submit.prevent="form.delete(route('series.destroy', serie.id))">
+            <button type="submit" class="bg-red-500 text-white rounded py-2 px-4 shadow hover:bg-red-600">
+              Excluir
+            </button>
+          </form>
+        </span>
       </li>
     </ul>
   </MainLayout>
