@@ -5,7 +5,7 @@
     </ButtonLink>
     <ul class="mt-4">
       <li v-for="(serie, index) in series" :key="index" class="py-2 px-4 bg-white shadow mb-4 rounded">
-        {{ serie }}
+        {{ serie.title }}
       </li>
     </ul>
   </MainLayout>
