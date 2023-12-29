@@ -70,6 +70,9 @@ class SeriesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $serie = Serie::findOrFail($id);
+        $serie->delete();
+
+        return redirect()->route('series.index');
     }
 }
