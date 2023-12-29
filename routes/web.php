@@ -38,5 +38,6 @@ Route::middleware('auth')->group(function () {
 Route::get('/series', [App\Http\Controllers\SeriesController::class, 'index'])->name('series.index');
 
 Route::get('/series/create', [App\Http\Controllers\SeriesController::class, 'create'])->name('series.create');
+Route::post('/series', [App\Http\Controllers\SeriesController::class, 'store'])->name('series.store');
 
 require __DIR__.'/auth.php';
