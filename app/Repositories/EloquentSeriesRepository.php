@@ -12,7 +12,7 @@ class EloquentSeriesRepository implements SeriesRepositoryInterface
 {
   public function create(array $data): Series
   {
-    $series = DB::transaction(function () use ($data) {
+    return DB::transaction(function () use ($data) {
       $series = Series::create($data);
       $seasons = [];
       $episodes = [];
@@ -30,7 +30,5 @@ class EloquentSeriesRepository implements SeriesRepositoryInterface
 
       return $series;
     });
-
-    return $series;
   }
 }

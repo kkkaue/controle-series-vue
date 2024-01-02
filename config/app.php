@@ -173,6 +173,7 @@ return [
          * Custom Service Providers...
          */
         App\Providers\SeriesRepositoryProvider::class,
+        App\Providers\EpisodesRepositoryProvider::class,
     ])->toArray(),
 
     /*
