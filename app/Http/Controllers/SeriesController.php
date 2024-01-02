@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SeriesRequest;
-use App\Models\Serie;
+use App\Models\Series;
 use Illuminate\Http\Request;
 
 class SeriesController extends Controller
@@ -13,7 +13,7 @@ class SeriesController extends Controller
      */
     public function index()
     {
-        $series = Serie::query()
+        $series = Series::query()
             ->orderBy('title')
             ->get();
 
@@ -35,7 +35,7 @@ class SeriesController extends Controller
      */
     public function store(SeriesRequest $request)
     {
-        $serie = Serie::create([
+        $serie = Series::create([
             'title' => $request->title,
         ]);
 
@@ -55,7 +55,7 @@ class SeriesController extends Controller
      */
     public function edit(string $id)
     {
-        $serie = Serie::findOrFail($id);
+        $serie = Series::findOrFail($id);
 
         return inertia('Series/Edit', [
             'serie' => $serie,
@@ -67,7 +67,7 @@ class SeriesController extends Controller
      */
     public function update(SeriesRequest $request, string $id)
     {
-        $serie = Serie::findOrFail($id);
+        $serie = Series::findOrFail($id);
         $serie->update([
             'title' => $request->title,
         ]);
@@ -80,7 +80,7 @@ class SeriesController extends Controller
      */
     public function destroy(string $id)
     {
-        $serie = Serie::findOrFail($id);
+        $serie = Series::findOrFail($id);
         $serie->delete();
 
         return redirect()->route('series.index')->with('success', 'Série excluída com sucesso!');
