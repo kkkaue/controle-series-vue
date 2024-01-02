@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SeriesRequest;
 use App\Models\Serie;
 use Illuminate\Http\Request;
 
@@ -32,7 +33,7 @@ class SeriesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SeriesRequest $request)
     {
         $serie = Serie::create([
             'title' => $request->title,
@@ -64,7 +65,7 @@ class SeriesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(SeriesRequest $request, string $id)
     {
         $serie = Serie::findOrFail($id);
         $serie->update([

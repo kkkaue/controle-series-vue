@@ -1,8 +1,5 @@
 <template>
   <MainLayout title="Series">
-    <SuccessMessage v-if="$page.props.flash.success">
-      {{ $page.props.flash.success }}
-    </SuccessMessage>
     <ButtonLink :href="route('series.create')" >
       Adicionar Série
     </ButtonLink>
