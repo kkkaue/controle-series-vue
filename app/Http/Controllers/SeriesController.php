@@ -7,6 +7,7 @@ use App\Models\Season;
 use App\Models\Series;
 use App\Models\Episode;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SeriesController extends Controller
 {
@@ -37,21 +38,22 @@ class SeriesController extends Controller
      */
     public function store(SeriesRequest $request)
     {
-        $series = Series::create($request->all());
-        $seasons = [];
-        $episodes = [];
-
-        for ($i = 1; $i <= $request->seasons; $i++) {
-            $seasons[] = ['number' => $i, 'series_id' => $series->id];
-        }
-        Season::insert($seasons);
-
-        foreach ($series->seasons as $season) {
-            for ($i = 1; $i <= $request->episodes; $i++) {
-                $episodes[] = ['number' => $i, 'season_id' => $season->id];
+        DB::transaction(function () use ($request) {
+            $series = Series::create($request->all());
+            $seasons = [];
+            $episodes = [];
+            for ($i = 1; $i <= $request->seasons; $i++) {
+                $seasons[] = ['number' => $i, 'series_id' => $series->id];
             }
-        }
-        Episode::insert($episodes);
+            Season::insert($seasons);
+
+            foreach ($series->seasons as $season) {
+                for ($i = 1; $i <= $request->episodes; $i++) {
+                    $episodes[] = ['number' => $i, 'season_id' => $season->id];
+                }
+            }
+            Episode::insert($episodes);
+        });
 
         return redirect()->route('series.index')->with('success', 'Série criada com sucesso!');
     }
