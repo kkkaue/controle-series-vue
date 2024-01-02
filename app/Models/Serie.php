@@ -17,4 +17,11 @@ class Serie extends Model
   {
     return $this->hasMany(Season::class);
   }
+
+  protected static function booted()
+  {
+    self::addGlobalScope('order', function ($query) {
+      $query->orderBy('nome');
+    });
+  }
 }
