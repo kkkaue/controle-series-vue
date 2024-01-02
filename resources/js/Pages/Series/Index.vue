@@ -5,7 +5,9 @@
     </ButtonLink>
     <ul class="mt-4">
       <li v-for="(serie, index) in series" :key="index" class="py-2 px-4 bg-white shadow mb-4 rounded flex justify-between items-center">
-        {{ serie.title }}
+        <a :href="route('seasons.index', serie.id)" class="text-blue-500 hover:underline">
+          {{ serie.title }}
+        </a>
 
         <span class="flex gap-2">
           <ButtonLink :href="route('series.edit', serie.id)">
@@ -25,7 +27,6 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue';
 import ButtonLink from '@/Components/ButtonLink.vue';
-import SuccessMessage from '@/Components/SuccessMessage.vue';
 
 import { useForm } from '@inertiajs/vue3';
 
