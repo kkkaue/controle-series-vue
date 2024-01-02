@@ -12,4 +12,9 @@ class Serie extends Model
   protected $fillable = [
     'title',
   ];
+
+  public function seasons()
+  {
+    return $this->hasMany(Season::class);
+  }
 }
