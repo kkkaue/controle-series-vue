@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SeriesRequest;
+use App\Mail\NewSeriesAddedMail;
 use App\Models\Series;
+use App\Models\User;
 use App\Repositories\Interfaces\SeriesRepositoryInterface;
+use Illuminate\Support\Facades\Mail;
 
 class SeriesController extends Controller
 {
@@ -42,7 +45,13 @@ class SeriesController extends Controller
             'episodes' => $request->episodes,
         ];
 
-        $this->repository->create($data);
+        $serie = $this->repository->create($data);
+
+        $userList = User::all();
+        foreach ($userList as $user) {
+            $email = new NewSeriesAddedMail($serie);
+            Mail::to($user)->queue($email);
+        }
 
         return redirect()->route('series.index')->with('success', 'Série criada com sucesso!');
     }

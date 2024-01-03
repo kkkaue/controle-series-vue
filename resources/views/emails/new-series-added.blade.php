@@ -6,6 +6,6 @@
 </head>
 <body>
     <h1>Nova série adicionada</h1>
-    <p>Uma nova série foi adicionada: {{ $nome }}</p>
+    <p>Uma nova série foi adicionada: {{ $series->title }}</p>
 </body>
 </html>

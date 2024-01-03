@@ -10,10 +10,11 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class NewSeriesAddedMail extends Mailable
+class NewSeriesAddedMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
+    public $tries = 5;
     public $series;
 
     /**
@@ -30,7 +31,7 @@ class NewSeriesAddedMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Nova série adicionada: ' . $this->series->name,
+            subject: 'Nova série adicionada: ' . $this->series->title,
         );
     }
 
