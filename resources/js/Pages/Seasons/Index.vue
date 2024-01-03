@@ -5,9 +5,11 @@
     </ButtonLink>
     <ul class="mt-4">
       <li v-for="(season, index) in seasons" :key="index" class="py-2 px-4 bg-white shadow mb-4 rounded flex justify-between items-center">
-        Temporada {{ season.number }}
+        <a :href="route('episodes.index', season.id)" class="text-blue-500 hover:underline">
+          Temporada {{ season.number }}
+        </a>
         <span class="bg-gray-200 text-gray-700 rounded-full py-1 px-2 text-sm">
-          {{ season.episodes.length }}
+          {{ season.watched_episodes.length }} / {{ season.episodes.length }}
         </span>
       </li>
     </ul>

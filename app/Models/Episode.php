@@ -13,6 +13,10 @@ class Episode extends Model
       'number',
     ];
 
+    protected $casts = [
+      'watched' => 'boolean',
+    ];
+
     public function season()
     {
       return $this->belongsTo(Season::class);

@@ -16,9 +16,7 @@ class SeriesController extends Controller
      */
     public function index()
     {
-        $series = Series::query()
-            ->orderBy('title')
-            ->get();
+        $series = Series::all();
 
         return inertia('Series/Index', [
             'series' => $series,

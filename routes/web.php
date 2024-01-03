@@ -39,4 +39,7 @@ Route::resource('series', \App\Http\Controllers\SeriesController::class);
 
 Route::get('/series/{series}/seasons', [\App\Http\Controllers\SeasonsController::class, 'index'])->name('seasons.index');
 
+Route::get('/seasons/{season}/episodes', [\App\Http\Controllers\EpisodesController::class, 'index'])->name('episodes.index');
+Route::post('/seasons/{season}/episodes/whatch', [\App\Http\Controllers\EpisodesController::class, 'watch'])->name('episodes.watch');
+
 require __DIR__.'/auth.php';

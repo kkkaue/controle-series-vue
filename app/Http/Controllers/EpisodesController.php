@@ -3,22 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Models\Season;
-use App\Models\Series;
+use App\Repositories\Interfaces\EpisodesRepositoryInterface;
 use Illuminate\Http\Request;
 
-class SeasonsController extends Controller
+class EpisodesController extends Controller
 {
+    public function __construct(private EpisodesRepositoryInterface $repository)
+    {
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index(Series $series)
+    public function index(Season $season)
     {
-        $seasons = $series->seasons()->with(['episodes', 'watchedEpisodes'])->get();
-
-        return inertia('Seasons/Index', [
-            'series' => $series,
-            'seasons' => $seasons,
+        return inertia('Episodes/Index', [
+            'series' => $season->series,
+            'season' => $season,
+            'episodes' => $season->episodes,
         ]);
+    }
+
+    public function watch(Season $season, Request $request)
+    {
+        $this->repository->watch($season, $request->episodes);
+
+        return redirect()->back();
     }
 
     /**
