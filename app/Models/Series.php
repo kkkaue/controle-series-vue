@@ -18,6 +18,11 @@ class Series extends Model
     return $this->hasMany(Season::class);
   }
 
+  public function episodes()
+  {
+    return $this->hasManyThrough(Episode::class, Season::class);
+  }
+
   protected static function booted()
   {
     self::addGlobalScope('order', function ($query) {

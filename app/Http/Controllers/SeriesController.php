@@ -46,12 +46,8 @@ class SeriesController extends Controller
         ];
 
         $serie = $this->repository->create($data);
-
-        $userList = User::all();
-        foreach ($userList as $user) {
-            $email = new NewSeriesAddedMail($serie);
-            Mail::to($user)->queue($email);
-        }
+        
+        event(new \App\Events\SeriesCreated($serie));
 
         return redirect()->route('series.index')->with('success', 'Série criada com sucesso!');
     }
