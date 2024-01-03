@@ -27,7 +27,7 @@ class EpisodesController extends Controller
     {
         $this->repository->watch($season, $request->episodes);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Episódios marcados como assistidos!');
     }
 
     /**
